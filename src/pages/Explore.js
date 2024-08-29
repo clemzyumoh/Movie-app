@@ -10,7 +10,7 @@ function Explore() {
   const [data, setData] = useState([]);
 const [totalPageNo,setTotalPageNo] = useState(0)
 
-  console.log("params", params.explore);
+ 
   const fetchData = useCallback(async () => {
     try {
       const response = await axios.get(`/discover/${params.explore}`, {

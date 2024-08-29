@@ -35,7 +35,7 @@ const SearchPage = () => {
       fetchData();
     }
   }, [fetchData,query]);
-  console.log("location", location.search.slice(3));
+  
   const handleScroll = useCallback(() => {
     if (window.innerHeight + window.screenY >= document.body.offsetHeight) {
       setPage((previous) => previous + 1);

@@ -14,7 +14,7 @@ const Header = () => {
   const navigate = useNavigate();
  
 
-  console.log("location" , location.search.slice(3))
+  //console.log("location" , location.search.slice(3))
 
   useEffect(() => {
     if (searchInput) {

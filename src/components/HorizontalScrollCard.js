@@ -1,10 +1,9 @@
 import React, { useRef } from "react";
 import Card from "./card";
-//import { useSelector } from "react-redux";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
 
 const HorizontalScrollCard = ({data=[],heading,trending,media_type}) => {
-  //const trendingData = useSelector((state) => state.movieData.bannerData);
+  
   const containerRef = useRef();
   const handleNext = () => {
     containerRef.current.scrollLeft += 300;

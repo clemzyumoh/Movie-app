@@ -7,12 +7,7 @@ const BannerHome = () => {
   const bannerData = useSelector((state) => state.movieData.bannerData);
   const imageUrl = useSelector((state) => state.movieData.imageUrl);
   const [currentImage, setCurrentImage] = useState(0);
-  // const handleNext = () => {
-  //   if (currentImage < bannerData.length - 1) {
-  //     setCurrentImage((previous) => previous + 1);
-  //   }
-  // };
-  // Wrap handleNext in useCallback
+  
   const handleNext = useCallback(() => {
     if (currentImage < bannerData.length - 1) {
       setCurrentImage((previous) => previous + 1);

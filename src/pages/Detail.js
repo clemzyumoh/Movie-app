@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import moment from "moment";
@@ -7,6 +7,7 @@ import useFetchDetail from "../Hooks/UseFetchDetail";
 import Divider from "../components/Divider";
 import HorizontalScrollCard from "../components/HorizontalScrollCard";
 import useFetch from "../Hooks/UseFetch";
+import VideoPlay from "../components/VideoPlay";
 
 const Detail = () => {
   const params = useParams();
@@ -21,8 +22,14 @@ const Detail = () => {
   const { data: recommendedData } = useFetch(
     `/${params?.explore}/${params?.id}/recommendations`
   );
-  console.log("data", data);
-  console.log("cast", castData);
+
+  const [playVideo, setPlayVideo] = useState(false);
+  const [playVideoId, setPlayVideoId] = useState("");
+
+  const handlePlayVideo = (data) => {
+    setPlayVideoId(data);
+    setPlayVideo(true);
+  };
 
   const duration = (Number(data?.runtime) / 60).toFixed(1).split(".");
 
@@ -30,10 +37,6 @@ const Detail = () => {
     ?.filter((el) => el?.job === "Writer")
     .map((el) => el?.name)
     .join(", ");
-
-  console.log("writer", writer);
-
-  console.log("duration", duration);
 
   return (
     <div>
@@ -54,6 +57,12 @@ const Detail = () => {
             className="h-80 w-60 object-cover top-0 rounded min-w-60"
             alt="banner"
           />
+          <button
+            onClick={() => handlePlayVideo(data)}
+            className="mt-3 w-full py-2 px-4 text-center bg-white text-black rounded text-lg font-bold hover:bg-gradient-to-l from-red-500 to-orange-500 hover:scale-105 transition-all"
+          >
+            Play Now
+          </button>
         </div>
         <div>
           <h2 className="font-bold text-2xl lg:text-4xl text-white">
@@ -141,6 +150,14 @@ const Detail = () => {
           media_type={params?.explore}
         />
       </div>
+
+      {playVideo && (
+        <VideoPlay
+          data={playVideoId}
+          close={() => setPlayVideo(false)}
+          media_type={params?.explore}
+        />
+      )}
     </div>
   );
 };
